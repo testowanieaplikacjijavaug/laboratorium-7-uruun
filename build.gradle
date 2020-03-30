@@ -9,6 +9,7 @@
 plugins {
     // Apply the java-library plugin to add support for Java Library
     id 'java-library'
+    id 'jacoco'
 }
 
 repositories {
@@ -16,6 +17,8 @@ repositories {
     // You can declare any Maven/Ivy/file repository here.
     jcenter()
 }
+
+sourceCompatibility = 1.8
 
 dependencies {
     // This dependency is exported to consumers, that is to say found on their compile classpath.
@@ -25,13 +28,23 @@ dependencies {
     implementation 'com.google.guava:guava:28.2-jre'
 
     // Use JUnit Jupiter API for testing.
-    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.6.0'
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.6.1'
 
     // Use JUnit Jupiter Engine for testing.
-    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.6.0'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.6.1'
+    
+    testRuntimeOnly 'org.junit.platform:junit-platform-launcher:1.6.1'
+    testImplementation 'org.junit.jupiter:junit-jupiter-params:5.6.1'
 }
 
 test {
     // Use junit platform for unit tests
     useJUnitPlatform()
+}
+
+jacocoTestReport {
+    reports {
+        xml.enabled = true
+        html.enabled = true
+    }
 }
